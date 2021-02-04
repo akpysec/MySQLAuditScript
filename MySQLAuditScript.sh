@@ -5,7 +5,7 @@
 # ./MySQL_AndreysNew.sh
 # if getting error "BAD INTERPRETER, Path not found", use the following command and run script again after:
 # sed -i -e 's/\r$//' MySQL_AndreysNew.sh
-# After a succsesful run check "3 File System Permissions" paths for permissions on the Host machine
+# After a succsesful run check "3 File System Permissions" paths for permissions on the Host machine and the rest of manual checks, ENJOY :)
 
 
 echo "Enter your username for mysql (root recommended)";
