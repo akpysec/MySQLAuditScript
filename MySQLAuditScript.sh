@@ -251,7 +251,7 @@ sleep .5
 echo "==========================================================================================================================" >> SEC_AUDIT.txt
 echo "3 File System Permissions" >> SEC_AUDIT.txt
 echo "==========================================================================================================================" >> SEC_AUDIT.txt
-find / -type d -name "mysql" | while read line ; do echo $line & ls -lah $line ; done >> SEC_AUDIT.txt
+find / -type d -name "mysql" | while read line ; do ls -lah $line && echo $line ; done >> SEC_AUDIT.txt
 
 sleep .5
 
