@@ -228,19 +228,19 @@ echo "1 Operating System Level Configuration" >> SEC_AUDIT.txt
 echo "=======================================" >> SEC_AUDIT.txt
 # echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.2 Use Dedicated Least Privileged Account for MySQL Daemon/Service" >> SEC_AUDIT.txt
-echo ps -ef | egrep '^mysql.*$' >> SEC_AUDIT.txt
+ps -ef | egrep '^mysql.*$' >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.3 Disable MySQL Command History" >> SEC_AUDIT.txt
-echo find /home -name ".mysql_history" >> SEC_AUDIT.txt
+find /home -name ".mysql_history" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.4 Verify That the MYSQL_PWD Environment Variables Is Not In Use" >> SEC_AUDIT.txt
-echo grep MYSQL_PWD /proc/*/environ >> SEC_AUDIT.txt
+grep MYSQL_PWD /proc/*/environ >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.5 Disable Interactive Login" >> SEC_AUDIT.txt
-echo getent passwd mysql | egrep "^.*[\/bin\/false|\/sbin\/nologin]$" >> SEC_AUDIT.txt
+getent passwd mysql | egrep "^.*[\/bin\/false|\/sbin\/nologin]$" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.6 Verify That 'MYSQL_PWD' Is Not Set In Users' Profiles" >> SEC_AUDIT.txt
-echo grep MYSQL_PWD /home/*/.{bashrc,profile,bash_profile} >> SEC_AUDIT.txt
+grep MYSQL_PWD /home/*/.{bashrc,profile,bash_profile} >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 
 
