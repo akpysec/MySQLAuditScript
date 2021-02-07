@@ -221,6 +221,8 @@ echo "SELECT user, host FROM mysql.user WHERE user='repl' AND host = '%';"| mysq
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 
 # Manual System Level Checks
+echo ""
+echo ""
 echo "=============================================================" >> SEC_AUDIT.txt
 echo "SYSTEM LEVEL COMMANDS:" >> SEC_AUDIT.txt
 echo "=============================================================" >> SEC_AUDIT.txt
@@ -228,19 +230,19 @@ echo "1 Operating System Level Configuration" >> SEC_AUDIT.txt
 echo "=============================================================" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.2 Use Dedicated Least Privileged Account for MySQL Daemon/Service" >> SEC_AUDIT.txt
-ps -ef | egrep '^mysql.*$' | grep . || echo 'No Value found' >> SEC_AUDIT.txt
+ps -ef | egrep '^mysql.*$' | grep . >> SEC_AUDIT.txt || echo 'No Value found' >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.3 Disable MySQL Command History" >> SEC_AUDIT.txt
-find /home -name ".mysql_history" | grep . || echo 'No Value found' >> SEC_AUDIT.txt
+find /home -name ".mysql_history" | grep . >> SEC_AUDIT.txt || echo 'No Value found' >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.4 Verify That the MYSQL_PWD Environment Variables Is Not In Use" >> SEC_AUDIT.txt
-grep MYSQL_PWD /proc/*/environ | grep . || echo 'No Value found' >> SEC_AUDIT.txt
+grep MYSQL_PWD /proc/*/environ | grep . >> SEC_AUDIT.txt || echo 'No Value found' >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.5 Disable Interactive Login" >> SEC_AUDIT.txt
-getent passwd mysql | egrep "^.*[\/bin\/false|\/sbin\/nologin]$" | grep . || echo 'No Value found'>> SEC_AUDIT.txt
+getent passwd mysql | egrep "^.*[\/bin\/false|\/sbin\/nologin]$" | grep . >> SEC_AUDIT.txt || echo 'No Value found'>> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.6 Verify That 'MYSQL_PWD' Is Not Set In Users' Profiles" >> SEC_AUDIT.txt
-grep MYSQL_PWD /home/*/.{bashrc,profile,bash_profile} | grep . || echo 'No Value found' >> SEC_AUDIT.txt
+grep MYSQL_PWD /home/*/.{bashrc,profile,bash_profile} | grep . >> SEC_AUDIT.txt || echo 'No Value found' >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 
 echo "=============================================================" >> SEC_AUDIT.txt
