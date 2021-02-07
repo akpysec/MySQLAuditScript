@@ -263,4 +263,11 @@ echo "-------------------------------------------------------------" >> SEC_AUDI
 # echo ls -ld <path_to_plugin_directory> >> SEC_AUDIT.txt
 # echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 
+
+# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
+# echo "Global Configurations of MySQL" >> SEC_AUDIT.txt
+# mysql -uroot -A -p -e"SHOW GLOBAL VARIABLES;" >> SEC_AUDIT.txt
+# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
+
 echo "DONE! Output in th SEC_AUDIT.txt file"
+
