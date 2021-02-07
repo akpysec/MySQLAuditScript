@@ -24,20 +24,20 @@ done
 
 
 
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "Security Audit Script" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "1 Operating System Level Configuration" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.1 Place Databases on Non-System Partitions" >> SEC_AUDIT.txt
 echo "show variables where variable_name = 'datadir';"| mysql -u$username -p$password >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 
 
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "3 File System Permissions" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "3.2 Ensure 'log_bin_basename' Files Have Appropriate Permissions" >> SEC_AUDIT.txt
 echo "show variables like 'log_bin_basename';"| mysql -u$username -p$password >> SEC_AUDIT.txt
@@ -64,9 +64,9 @@ echo "-------------------------------------------------------------" >> SEC_AUDI
 
 
 
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "4 General" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "4.2 Ensure the 'test' Database Is Not Installed" >> SEC_AUDIT.txt
 echo "SHOW DATABASES LIKE 'test';"| mysql -u$username -p$password >> SEC_AUDIT.txt
@@ -89,9 +89,9 @@ echo "-------------------------------------------------------------" >> SEC_AUDI
 
 
 
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "5 MySQL Permissions" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "5.1 Ensure Only Administrative Users Have Full Database Access" >> SEC_AUDIT.txt
 echo "SELECT user, host
@@ -148,9 +148,9 @@ echo "-------------------------------------------------------------" >> SEC_AUDI
 
 
 
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "6 Auditing and Logging" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "6.1 Ensure 'log_error' Is Not Empty" >> SEC_AUDIT.txt
 echo "SHOW variables LIKE 'log_error';"| mysql -u$username -p$password >> SEC_AUDIT.txt
@@ -164,9 +164,9 @@ echo "-------------------------------------------------------------" >> SEC_AUDI
 
 
 
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "7 Authentication" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "7.2 Ensure 'sql_mode' Contains 'NO_AUTO_CREATE_USER'" >> SEC_AUDIT.txt
 echo "SELECT @@global.sql_mode;"| mysql -u$username -p$password >> SEC_AUDIT.txt
@@ -190,9 +190,9 @@ echo "-------------------------------------------------------------" >> SEC_AUDI
 
 
 
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "8 Network" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "8.1 Ensure 'have_ssl' Is Set to 'YES'" >> SEC_AUDIT.txt
 echo "SHOW variables WHERE variable_name = 'have_ssl';"| mysql -u$username -p$password >> SEC_AUDIT.txt
@@ -203,9 +203,9 @@ echo "-------------------------------------------------------------" >> SEC_AUDI
 
 
 
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "9 Replication" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "9.2 Ensure 'MASTER_SSL_VERIFY_SERVER_CERT' Is Set to 'YES' or '1'" >> SEC_AUDIT.txt
 echo "SELECT ssl_verify_server_cert from mysql.slave_master_info;"| mysql -u$username -p$password >> SEC_AUDIT.txt
@@ -221,12 +221,12 @@ echo "SELECT user, host FROM mysql.user WHERE user='repl' AND host = '%';"| mysq
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 
 # Manual System Level Checks
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "SYSTEM LEVEL COMMANDS:" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "1 Operating System Level Configuration" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
+echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 echo "1.2 Use Dedicated Least Privileged Account for MySQL Daemon/Service" >> SEC_AUDIT.txt
 ps -ef | egrep '^mysql.*$' >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
@@ -244,9 +244,9 @@ grep MYSQL_PWD /home/*/.{bashrc,profile,bash_profile} >> SEC_AUDIT.txt
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 
 
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 echo "3 File System Permissions" >> SEC_AUDIT.txt
-echo "=======================================" >> SEC_AUDIT.txt
+echo "=============================================================" >> SEC_AUDIT.txt
 find / -type d -name "mysql" | while read line ; do echo $line & ls -lah $line ; done >> SEC_AUDIT.txt
 
 
