@@ -221,53 +221,34 @@ echo "SELECT user, host FROM mysql.user WHERE user='repl' AND host = '%';"| mysq
 echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 
 # Manual System Level Checks
-# SYSTEM LEVEL COMMANDS:
-# echo "1.1 Place Databases on Non-System Partitions" >> SEC_AUDIT.txt
-# echo df -h <datadir Value> >> SEC_AUDIT.txt
+echo "=======================================" >> SEC_AUDIT.txt
+echo "SYSTEM LEVEL COMMANDS:" >> SEC_AUDIT.txt
+echo "=======================================" >> SEC_AUDIT.txt
+echo "1 Operating System Level Configuration" >> SEC_AUDIT.txt
+echo "=======================================" >> SEC_AUDIT.txt
 # echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "1.2 Use Dedicated Least Privileged Account for MySQL Daemon/Service" >> SEC_AUDIT.txt
-# echo ps -ef | egrep '^mysql.*$' >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "1.3 Disable MySQL Command History" >> SEC_AUDIT.txt
-# echo find /home -name ".mysql_history" >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "1.4 Verify That the MYSQL_PWD Environment Variables Is Not In Use" >> SEC_AUDIT.txt
-# echo grep MYSQL_PWD /proc/*/environ >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "1.5 Disable Interactive Login" >> SEC_AUDIT.txt
-# echo getent passwd mysql | egrep "^.*[\/bin\/false|\/sbin\/nologin]$" >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "1.6 Verify That 'MYSQL_PWD' Is Not Set In Users' Profiles" >> SEC_AUDIT.txt
-# echo grep MYSQL_PWD /home/*/.{bashrc,profile,bash_profile} >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-
-# echo "3.2 Ensure 'log_bin_basename' Files Have Appropriate Permissions" >> SEC_AUDIT.txt
-# echo ls -l <path_to_log_bin_basename> >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "3.3 Ensure 'log_error' Has Appropriate Permissions" >> SEC_AUDIT.txt
-# echo ls -l <path_to_log_error> >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "3.4 Ensure 'slow_query_log' Has Appropriate Permissions" >> SEC_AUDIT.txt
-# echo ls -l <path_to_slow_query_log> >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "3.5 Ensure 'relay_log_basename' Files Have Appropriate Permissions" >> SEC_AUDIT.txt
-# echo ls -l <path_to_relay_log_basename> >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "3.6 Ensure 'general_log_file' Has Appropriate Permissions" >> SEC_AUDIT.txt
-# echo ls -l <path_to_general_log_file> >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "3.7 Ensure SSL Key Files Have Appropriate Permissions" >> SEC_AUDIT.txt
-# echo ls -l <path_to_ssl_key_files> >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "3.8 Ensure Plugin Directory Has Appropriate Permissions" >> SEC_AUDIT.txt
-# echo ls -ld <path_to_plugin_directory> >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "1.2 Use Dedicated Least Privileged Account for MySQL Daemon/Service" >> SEC_AUDIT.txt
+echo ps -ef | egrep '^mysql.*$' >> SEC_AUDIT.txt
+echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "1.3 Disable MySQL Command History" >> SEC_AUDIT.txt
+echo find /home -name ".mysql_history" >> SEC_AUDIT.txt
+echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "1.4 Verify That the MYSQL_PWD Environment Variables Is Not In Use" >> SEC_AUDIT.txt
+echo grep MYSQL_PWD /proc/*/environ >> SEC_AUDIT.txt
+echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "1.5 Disable Interactive Login" >> SEC_AUDIT.txt
+echo getent passwd mysql | egrep "^.*[\/bin\/false|\/sbin\/nologin]$" >> SEC_AUDIT.txt
+echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "1.6 Verify That 'MYSQL_PWD' Is Not Set In Users' Profiles" >> SEC_AUDIT.txt
+echo grep MYSQL_PWD /home/*/.{bashrc,profile,bash_profile} >> SEC_AUDIT.txt
+echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
 
 
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
-# echo "Global Configurations of MySQL" >> SEC_AUDIT.txt
-# mysql -uroot -A -p -e"SHOW GLOBAL VARIABLES;" >> SEC_AUDIT.txt
-# echo "-------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "=======================================" >> SEC_AUDIT.txt
+echo "3 File System Permissions" >> SEC_AUDIT.txt
+echo "=======================================" >> SEC_AUDIT.txt
+find / -type d -name "mysql" | while read line ; do echo $line & ls -lah $line ; done >> SEC_AUDIT.txt
+
 
 echo "DONE! Output in th SEC_AUDIT.txt file"
 
