@@ -1,5 +1,5 @@
 #!/bin/bash
-# MySQL 5.7 Security Audit Script CIS
+# MySQL 5.7 Security Audit Script based on CIS Benchmark guide lines
 # Use following command to run this scipt 
 # chmod +x MySQLAuditScript.sh
 # ./MySQLAuditScript.sh
