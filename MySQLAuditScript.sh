@@ -1,10 +1,10 @@
 #!/bin/bash
 # MySQL 5.7 Security Audit Script CIS
 # Use following command to run this scipt 
-# chmod +x MySQL_AndreysNew.sh
-# ./MySQL_AndreysNew.sh
+# chmod +x MySQLAuditScript.sh
+# ./MySQLAuditScript.sh
 # if getting error "BAD INTERPRETER, Path not found", use the following command and run script again after:
-# sed -i -e 's/\r$//' MySQL_AndreysNew.sh
+# sed -i -e 's/\r$//' MySQLAuditScript.sh
 
 
 echo "Enter your username for mysql (root recommended)";
