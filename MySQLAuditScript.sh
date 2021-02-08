@@ -33,6 +33,21 @@ echo "--------------------------------------------------------------------------
 echo "1.1 Place Databases on Non-System Partitions" >> SEC_AUDIT.txt
 echo "show variables where variable_name = 'datadir';"| mysql -u$username -p$password | grep . >> SEC_AUDIT.txt || echo 'No Value found' >> SEC_AUDIT.txt
 echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "1.2 Use Dedicated Least Privileged Account for MySQL Daemon/Service" >> SEC_AUDIT.txt
+ps -ef | egrep '^mysql.*$' | grep . >> SEC_AUDIT.txt || echo 'No Value found - THIS IS A FINDING' >> SEC_AUDIT.txt
+echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "1.3 Disable MySQL Command History" >> SEC_AUDIT.txt
+find /home -name ".mysql_history" | grep . && echo "For each file returned determine whether that file is symbolically linked to /dev/null." >> SEC_AUDIT.txt || echo 'No Value found - PASS' >> SEC_AUDIT.txt
+echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "1.4 Verify That the MYSQL_PWD Environment Variables Is Not In Use" >> SEC_AUDIT.txt
+grep MYSQL_PWD /proc/*/environ | grep . && echo "If only grep present than it's ok" >> SEC_AUDIT.txt || echo 'No Value found - PASS' >> SEC_AUDIT.txt
+echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "1.5 Disable Interactive Login" >> SEC_AUDIT.txt
+getent passwd mysql | egrep "^.*[\/bin\/false|\/sbin\/nologin]$" | grep . >> SEC_AUDIT.txt || echo 'No Value found - THIS IS A FINDING'>> SEC_AUDIT.txt
+echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "1.6 Verify That 'MYSQL_PWD' Is Not Set In Users' Profiles" >> SEC_AUDIT.txt
+grep MYSQL_PWD /home/*/.{bashrc,profile,bash_profile} | grep . >> SEC_AUDIT.txt || echo 'No Value found' >> SEC_AUDIT.txt
+echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
 
 
 echo "==========================================================================================================================" >> SEC_AUDIT.txt
@@ -60,7 +75,11 @@ echo "--------------------------------------------------------------------------
 echo "3.8 Ensure Plugin Directory Has Appropriate Permissions" >> SEC_AUDIT.txt
 echo "show variables where variable_name = 'plugin_dir';"| mysql -u$username -p$password | grep . >> SEC_AUDIT.txt || echo 'No Value found' >> SEC_AUDIT.txt
 echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
+echo "Pulling list of directories & files permissions" >> SEC_AUDIT.txt
+find / -type d -name "mysql" | while read line ; do ls -lah $line && echo $line ; done >> SEC_AUDIT.txt
 
+sleep .5
+echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
 
 
 
@@ -219,39 +238,6 @@ echo "--------------------------------------------------------------------------
 echo "9.5 Ensure No Replication Users Have Wildcard Hostnames" >> SEC_AUDIT.txt
 echo "SELECT user, host FROM mysql.user WHERE user='repl' AND host = '%';"| mysql -u$username -p$password | grep . >> SEC_AUDIT.txt || echo 'No Value found' >> SEC_AUDIT.txt
 echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
-
-sleep .5
-# Manual System Level Checks
-echo ""
-echo ""
-echo "==========================================================================================================================" >> SEC_AUDIT.txt
-echo "SYSTEM LEVEL COMMANDS:" >> SEC_AUDIT.txt
-echo "==========================================================================================================================" >> SEC_AUDIT.txt
-echo "1 Operating System Level Configuration" >> SEC_AUDIT.txt
-echo "==========================================================================================================================" >> SEC_AUDIT.txt
-echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
-echo "1.2 Use Dedicated Least Privileged Account for MySQL Daemon/Service" >> SEC_AUDIT.txt
-ps -ef | egrep '^mysql.*$' | grep . >> SEC_AUDIT.txt || echo 'No Value found - THIS IS A FINDING' >> SEC_AUDIT.txt
-echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
-echo "1.3 Disable MySQL Command History" >> SEC_AUDIT.txt
-find /home -name ".mysql_history" | grep . && echo "For each file returned determine whether that file is symbolically linked to /dev/null." >> SEC_AUDIT.txt || echo 'No Value found - PASS' >> SEC_AUDIT.txt
-echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
-echo "1.4 Verify That the MYSQL_PWD Environment Variables Is Not In Use" >> SEC_AUDIT.txt
-grep MYSQL_PWD /proc/*/environ | grep . && echo "If only grep present than it's ok" >> SEC_AUDIT.txt || echo 'No Value found - PASS' >> SEC_AUDIT.txt
-echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
-echo "1.5 Disable Interactive Login" >> SEC_AUDIT.txt
-getent passwd mysql | egrep "^.*[\/bin\/false|\/sbin\/nologin]$" | grep . >> SEC_AUDIT.txt || echo 'No Value found - THIS IS A FINDING'>> SEC_AUDIT.txt
-echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
-echo "1.6 Verify That 'MYSQL_PWD' Is Not Set In Users' Profiles" >> SEC_AUDIT.txt
-grep MYSQL_PWD /home/*/.{bashrc,profile,bash_profile} | grep . >> SEC_AUDIT.txt || echo 'No Value found' >> SEC_AUDIT.txt
-echo "--------------------------------------------------------------------------------------------------------------------------" >> SEC_AUDIT.txt
-
-sleep .5
-
-echo "==========================================================================================================================" >> SEC_AUDIT.txt
-echo "3 File System Permissions" >> SEC_AUDIT.txt
-echo "==========================================================================================================================" >> SEC_AUDIT.txt
-find / -type d -name "mysql" | while read line ; do ls -lah $line && echo $line ; done >> SEC_AUDIT.txt
 
 sleep .5
 
