@@ -21,6 +21,10 @@ while IFS= read -r -s -n1 pass; do
   fi
 done
 
+#####################################
+# Needs testing LDAP Authentication #
+#####################################
+#SELECT PLUGIN_NAME, PLUGIN_STATUS FROM INFORMATION_SCHEMA.PLUGINS WHERE PLUGIN_NAME LIKE '%ldap%';
 
 
 echo "==========================================================================================================================" >> SEC_AUDIT.txt
